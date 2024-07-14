@@ -171,7 +171,7 @@ function main() {
     amount = Number(document.getElementById('amount').value);
     numid = Number(document.getElementById('numid').value);
 
-    let strlist = "<em>tips:click and copy value.</em>"
+    let strlist = "<em>tips:click and copy value.</em><br/>"
 
     for (let i = 0; i < amount; i++) {
         strlist += "<input type='text' class='class' readonly value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"

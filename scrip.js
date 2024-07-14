@@ -174,8 +174,23 @@ function main() {
     let strlist = ""
 
     for (let i = 0; i < amount; i++) {
-        strlist += "<input type='text' value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"
+        strlist += "<input type='text' class='class' readonly value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"
     }
 
     document.getElementById("demo").innerHTML = strlist;
+    spans = document.querySelectorAll(".class");
+	for (const span of spans) {
+	  span.onclick = function() {
+	    document.execCommand("copy");
+	  }
+	
+	  span.addEventListener("copy", function(event) {
+	    event.preventDefault();
+	    if (event.clipboardData) {
+	      event.clipboardData.setData("text/plain", span.textContent);
+	      alert(event.clipboardData.getData("text"))
+	    }
+	  });
+	}
 }
+

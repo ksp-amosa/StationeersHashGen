@@ -187,8 +187,8 @@ function main() {
 	  span.addEventListener("copy", function(event) {
 	    event.preventDefault();
 	    if (event.clipboardData) {
-	      event.clipboardData.setData("text/plain", span.textContent);
-	      alert(event.clipboardData.getData("text"))
+	      event.clipboardData.setData("text/plain", span.value);
+	      console.log(event.clipboardData.getData("text"))
 	    }
 	  });
 	}

@@ -174,7 +174,7 @@ function main() {
     let strlist = ""
 
     for (let i = 0; i < amount; i++) {
-        strlist += sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "\n"
+        strlist += "<input type='text' value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"
     }
 
     document.getElementById("demo").innerHTML = strlist;

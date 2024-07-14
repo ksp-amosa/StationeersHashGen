@@ -188,7 +188,6 @@ function main() {
 	    event.preventDefault();
 	    if (event.clipboardData) {
 	      event.clipboardData.setData("text/plain", span.value);
-	      console.log(event.clipboardData.getData("text"))
 	    }
 	  });
 	}

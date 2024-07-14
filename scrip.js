@@ -178,13 +178,10 @@ function main() {
     }
 
     document.getElementById("demo").innerHTML = strlist;
-    const target = document.getElementById("alertDiv");
     spans = document.querySelectorAll(".class");
 	for (const span of spans) {
 	  span.onclick = function() {
 	    document.execCommand("copy");
-            target.style.opacity = '1';
-	    setInterval(() => target.style.opacity = '0', 3000);
 	  }
 	
 	  span.addEventListener("copy", function(event) {

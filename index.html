@@ -28,7 +28,7 @@
             border: 1px solid #ff9900;
             margin: 4px;
             padding:4px;
-            display: block;
+            display: inline-block;
         }
         .toast {
             position: fixed;
@@ -46,7 +46,7 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-6 text-center">Serial Name Generator for Stationeers</h1>
         <div class="flex flex-wrap -mx-2">
-            <div class="w-full md:w-1/2 px-2 mb-4">
+            <div class="w-full md:w-1/3 px-2 mb-4">
                 <form id="generatorForm" class="bg-gray-800 p-6 rounded-lg">
                     <div class="mb-4">
                         <label for="prefix" class="block mb-2">Prefix:</label>
@@ -67,7 +67,7 @@
                     <button type="button" id="generateBtn" class="btn w-full p-2 rounded">Generate</button>
                 </form>
             </div>
-            <div class="w-full md:w-1/2 px-2 mb-4">
+            <div class="w-full md:w-2/3 px-2 mb-4">
                 <div id="output" class="bg-gray-800 p-6 rounded-lg h-full">
                     <h2 class="text-xl font-bold mb-4">Output:</h2>
                     <div id="demo" class="mb-4"></div>
@@ -76,11 +76,11 @@
         </div>
     </div>
     <div id="toast" class="toast"></div>
-    <script src="scrip.js"></script>
+    <!-- <script src="scrip.js"></script> -->
     <script>
         if (typeof main !== 'function') {
           function main(){
-            var str = '<em>tips:click and copy value.</em><br><input type="text" class="class rounded" readonly="" value="LED-00-7BvvFk"><input type="text" class="class rounded" readonly="" value="LED-01-1gPnFx"><input type="text" class="class rounded" readonly="" value="LED-02-1p8BQ2"><input type="text" class="class rounded" readonly="" value="LED-03-9ErrCy"><input type="text" class="class rounded" readonly="" value="LED-04-23HAwe"><input type="text" class="class rounded" readonly="" value="LED-05-3BDZ0U"><input type="text" class="class rounded" readonly="" value="LED-06-2t3WUJ"><input type="text" class="class rounded" readonly="" value="LED-07-2WmuwP"><input type="text" class="class rounded" readonly="" value="LED-08-0TBPZx"><input type="text" class="class rounded" readonly="" value="LED-09-6qdHZk">';
+            var str = '<em>tips:click and copy value.</em><br><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-00-7BvvFk"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-01-1gPnFx"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-02-1p8BQ2"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-03-9ErrCy"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-04-23HAwe"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-05-3BDZ0U"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-06-2t3WUJ"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-07-2WmuwP"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-08-0TBPZx"><input type="text" class="class rounded cursor-pointer" readonly="" value="LED-09-6qdHZk">';
             document.getElementById("demo").innerHTML = str;
             return str;
           }

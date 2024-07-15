@@ -167,7 +167,7 @@ function pad(num, size) {
 
 function main() {
     prefix = document.getElementById('prefix').value;
-    pading = Number(document.getElementById('pading').value);
+    pading = Number(document.getElementById('padding').value);
     amount = Number(document.getElementById('amount').value);
     numid = Number(document.getElementById('numid').value);
 

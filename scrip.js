@@ -178,18 +178,6 @@ function main() {
     }
 
     document.getElementById("demo").innerHTML = strlist;
-    spans = document.querySelectorAll(".class");
-	for (const span of spans) {
-	  span.onclick = function() {
-	    document.execCommand("copy");
-	  }
-	
-	  span.addEventListener("copy", function(event) {
-	    event.preventDefault();
-	    if (event.clipboardData) {
-	      event.clipboardData.setData("text/plain", span.value);
-	    }
-	  });
-	}
+    setupCopyFunctionality();
 }
 

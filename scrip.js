@@ -174,9 +174,8 @@ function main() {
     let strlist = "<em>tips:click and copy value.</em><br/>"
 
     for (let i = 0; i < amount; i++) {
-        strlist += "<input type='text' class='class rounded' readonly value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"
+        strlist += "<input type='text' class='class rounded cursor-pointer' readonly value='"+sethash(prefix.replace("{}", pad(i, pading)),i+numid) + "' />\n"
     }
 
     document.getElementById("demo").innerHTML = strlist;
 }
-

@@ -13,15 +13,25 @@
             background-color: #f4f4f4;
         }
         .container {
-            max-width: 600px;
+            display: flex;
+            max-width: 1200px;
             margin: auto;
             background: white;
-            padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        .left-column, .right-column {
+            padding: 20px;
+        }
+        .left-column {
+            flex: 1;
+            border-right: 1px solid #ddd;
+        }
+        .right-column {
+            flex: 1;
+            display: none;
+        }
         h1 {
-            text-align: center;
             color: #333;
         }
         label {
@@ -49,6 +59,7 @@
             background-color: #45a049;
         }
         #demo {
+            font-size: 0.9em;
             margin-top: 20px;
             border: 1px solid #ddd;
             padding: 10px;
@@ -65,45 +76,53 @@
             border-radius: 4px;
             background-color: white;
             cursor: pointer;
+            font-size: 0.9em;
         }
         .class:hover {
             background-color: #f0f0f0;
         }
-        em {
-            display: block;
-            margin-bottom: 10px;
-            font-style: italic;
-            color: #666;
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Serial Name Generator for Stationeers</h1>
-        <em>CRC32 validating tool <a href="https://crc32.online/">https://crc32.online/</a></em>
-        <form id="serialForm">
-            <label for="prefix">Prefix:</label>
-            <input type="text" id="prefix" value="LED-{}-" required>
-            
-            <label for="pading">Padding:</label>
-            <input type="number" id="pading" value="2" min="1" required>
-            
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" value="100" min="1" required>
-            
-            <label for="numid">Numid:</label>
-            <input type="number" id="numid" value="1" min="1" required>
-            
-            <button type="button" onclick="main()">Generate</button>
-        </form>
-        <div id="demo"></div>
+        <div class="left-column">
+            <h1>Serial Name Generator for Stationeers</h1>
+            <p><em>CRC32 validating tool <a href="https://crc32.online/" target="_blank">https://crc32.online/</a></em></p>
+            <form id="serialForm">
+                <label for="prefix">Prefix:</label>
+                <input type="text" id="prefix" value="LED-{}-" required>
+                
+                <label for="pading">Padding:</label>
+                <input type="number" id="pading" value="2" min="1" required>
+                
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" value="100" min="1" required>
+                
+                <label for="numid">Numid:</label>
+                <input type="number" id="numid" value="1" min="1" required>
+                
+                <button type="button" onclick="main()">Generate</button>
+            </form>
+        </div>
+        <div class="right-column">
+            <div id="demo"></div>
+        </div>
     </div>
+    <div class="copy-toast" id="copyToast">Copied!</div>
 
-    <!-- 引入外部JavaScript文件 -->
     <script src="scrip.js"></script>
 
     <script>
-    // 這裡只保留必要的頁面互動代碼
     document.addEventListener('DOMContentLoaded', function() {
         const generateButton = document.querySelector('button');
         generateButton.addEventListener('click', main);
@@ -119,8 +138,17 @@
                 tempTextArea.select();
                 document.execCommand("copy");
                 document.body.removeChild(tempTextArea);
+                showCopyToast();
             }
         });
+    }
+
+    function showCopyToast() {
+        const toast = document.getElementById('copyToast');
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
     }
     </script>
 </body>

@@ -6,38 +6,40 @@
     <title>Serial Name Generator for Stationeers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+
         body {
-            background-color: #1a1a1a;
-            color: #ff9900;
+            background-color: #283739;
+            color: #a2c11c;
         }
         .btn {
-            background-color: #ff9900;
+            background-color: #a2c11c;
             color: #1a1a1a;
         }
         .btn:hover {
-            background-color: #ffad33;
+            background-color: #e0e0e0;
         }
         .input-field {
-            background-color: #2a2a2a;
-            color: #ff9900;
-            border: 1px solid #ff9900;
+            background-color: #283739;
+            color: #a2c11c;
+            border: 1px solid #a2c11c;
         }
         .class{
-            background-color: #2a2a2a;
-            color: #ff9900;
-            border: 1px solid #ff9900;
+            background-color: #283739;
+            color: #a2c11c;
+            border: 1px solid #a2c11c;
             margin: 4px;
             padding:4px;
             display: inline-block;
         }
         .toast {
             position: fixed;
-            top: 20%;
+            top: 10%;
             right: 170px;
-            background-color: rgba(255, 153, 0, 0.9);
+            background-color: #a2c11c;
             color: #1a1a1a;
             padding: 10px 20px;
             border-radius: 5px;
+            border: 1px solid #1a1a1a;
             opacity: 0;
             transition: opacity 0.5s;
         }
@@ -105,7 +107,7 @@
             toast.style.opacity = '1'
             setTimeout(() => {
                 toast.style.opacity = '0'
-            }, 1000);
+            }, 1500);
         }
 
         // 為 demo 區域中的每個輸入框添加複製功能
@@ -113,7 +115,7 @@
             if (e.target.tagName === 'INPUT') {
                 e.target.select();
                 document.execCommand('copy');
-                showToast(`${e.target.value} Copied!`);
+                showToast(`Copied!: ${e.target.value} `);
             }
         });
     </script>

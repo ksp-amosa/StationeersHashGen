@@ -1,128 +1,118 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serial Name Generator for Stationeers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #1a1a1a;
+            color: #ff9900;
         }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
+        .btn {
+            background-color: #ff9900;
+            color: #1a1a1a;
+        }
+        .btn:hover {
+            background-color: #ffad33;
+        }
+        .input-field {
+            background-color: #2a2a2a;
+            color: #ff9900;
+            border: 1px solid #ff9900;
+        }
+        .class{
+            background-color: #2a2a2a;
+            color: #ff9900;
+            border: 1px solid #ff9900;
+            margin: 4px;
+            padding:4px;
+            display: block;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 153, 0, 0.9);
+            color: #1a1a1a;
+            padding: 10px 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #demo {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-        }
-        .class {
-            display: block;
-            width: 100%;
-            margin-bottom: 5px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: white;
-            cursor: pointer;
-        }
-        .class:hover {
-            background-color: #f0f0f0;
-        }
-        em {
-            display: block;
-            margin-bottom: 10px;
-            font-style: italic;
-            color: #666;
+            display: none;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Serial Name Generator for Stationeers</h1>
-        <em>CRC32 validating tool <a href="https://crc32.online/">https://crc32.online/</a></em>
-        <form id="serialForm" style="float:left;width=100em;padding-right:2em;">
-            <label for="prefix">Prefix:</label>
-            <input type="text" id="prefix" value="LED-{}-" required>
-            
-            <label for="pading">Padding:</label>
-            <input type="number" id="pading" value="2" min="1" required>
-            
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" value="100" min="1" required>
-            
-            <label for="numid">Numid:</label>
-            <input type="number" id="numid" value="1" min="1" required>
-            
-            <button type="button" onclick="main()">Generate</button>
-        </form>
-        <div id="demo" style="float:left;min-width:20em;overflow-x:hidden;"></div>
+<body class="font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6 text-center">Serial Name Generator for Stationeers</h1>
+        <div class="flex flex-wrap -mx-2">
+            <div class="w-full md:w-1/2 px-2 mb-4">
+                <form id="generatorForm" class="bg-gray-800 p-6 rounded-lg">
+                    <div class="mb-4">
+                        <label for="prefix" class="block mb-2">Prefix:</label>
+                        <input type="text" id="prefix" value="LED-{}-" class="w-full p-2 input-field rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="padding" class="block mb-2">Padding:</label>
+                        <input type="number" id="padding" value="2" class="w-full p-2 input-field rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="amount" class="block mb-2">Amount:</label>
+                        <input type="number" id="amount" value="100" class="w-full p-2 input-field rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="numid" class="block mb-2">Numid:</label>
+                        <input type="number" id="numid" value="1" class="w-full p-2 input-field rounded">
+                    </div>
+                    <button type="button" id="generateBtn" class="btn w-full p-2 rounded">Generate</button>
+                </form>
+            </div>
+            <div class="w-full md:w-1/2 px-2 mb-4">
+                <div id="output" class="bg-gray-800 p-6 rounded-lg h-full">
+                    <h2 class="text-xl font-bold mb-4">Output:</h2>
+                    <div id="demo" class="mb-4"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- 引入外部JavaScript文件 -->
-    
+    <div id="toast" class="toast"></div>
     <script src="scrip.js"></script>
     <script>
-    // 這裡只保留必要的頁面互動代碼
-    document.addEventListener('DOMContentLoaded', function() {
-        const generateButton = document.querySelector('button');
-        generateButton.addEventListener('click', main);
-    });
+        if (typeof main !== 'function') {
+          function main(){
+            var str = '<em>tips:click and copy value.</em><br><input type="text" class="class rounded" readonly="" value="LED-00-7BvvFk"><input type="text" class="class rounded" readonly="" value="LED-01-1gPnFx"><input type="text" class="class rounded" readonly="" value="LED-02-1p8BQ2"><input type="text" class="class rounded" readonly="" value="LED-03-9ErrCy"><input type="text" class="class rounded" readonly="" value="LED-04-23HAwe"><input type="text" class="class rounded" readonly="" value="LED-05-3BDZ0U"><input type="text" class="class rounded" readonly="" value="LED-06-2t3WUJ"><input type="text" class="class rounded" readonly="" value="LED-07-2WmuwP"><input type="text" class="class rounded" readonly="" value="LED-08-0TBPZx"><input type="text" class="class rounded" readonly="" value="LED-09-6qdHZk">';
+            document.getElementById("demo").innerHTML = str;
+            return str;
+          }
+        }
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const prefix = document.getElementById('prefix').value;
+            const padding = document.getElementById('padding').value;
+            const amount = document.getElementById('amount').value;
+            const numid = document.getElementById('numid').value;
 
-    function setupCopyFunctionality() {
-        const spans = document.querySelectorAll(".class");
-        spans.forEach(span => {
-            span.onclick = function() {
-                const tempTextArea = document.createElement("textarea");
-                tempTextArea.value = this.value;
-                document.body.appendChild(tempTextArea);
-                tempTextArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempTextArea);
+            // 呼叫現有的 main() 函數
+            formValues = main();
+            
+        });
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 1500);
+        }
+
+        // 為 demo 區域中的每個輸入框添加複製功能
+        document.getElementById('demo').addEventListener('click', function(e) {
+            if (e.target.tagName === 'INPUT') {
+                e.target.select();
+                document.execCommand('copy');
+                showToast(`${e.target.value} Copied!`);
             }
         });
-    }
     </script>
-    
 </body>
 </html>
